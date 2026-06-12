@@ -1,0 +1,297 @@
+.booking-page {
+  text-align: left;
+}
+
+.booking-back-nav {
+  margin-bottom: 24px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.back-link:hover {
+  color: var(--primary);
+  transform: translateX(-4px);
+}
+
+/* Success Card */
+.booking-success-screen {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.success-icon {
+  color: var(--success);
+  filter: drop-shadow(0 0 8px var(--success-glow));
+}
+
+.ticket-receipt-card {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.ticket-receipt-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.ticket-receipt-card p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.redirect-notice {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Layout */
+.booking-container-layout {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .booking-container-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.booking-details-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Movie Details Panel */
+.movie-details-header {
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+}
+
+.booking-movie-poster {
+  width: 130px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.movie-details-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.movie-badge-genre {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--secondary);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.movie-details-info h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.duration-tag {
+  color: var(--text-muted);
+}
+
+.movie-synopsis {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Showtime Select */
+.showtime-selection-panel {
+  padding: 24px;
+}
+
+.panel-title-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.showtimes-list-btn {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.showtime-btn-select {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  outline: none;
+}
+
+.showtime-btn-select:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+}
+
+.showtime-btn-active {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: var(--primary);
+  color: var(--primary) !important;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.1);
+}
+
+/* Checkout summary styling */
+.checkout-summary-card {
+  padding: 24px;
+}
+
+.sticky-checkout {
+  position: sticky;
+  top: calc(var(--navbar-height) + 30px);
+}
+
+.checkout-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.checkout-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  margin-bottom: 14px;
+}
+
+.checkout-label {
+  color: var(--text-secondary);
+}
+
+.checkout-val {
+  color: var(--text-primary);
+  text-align: right;
+}
+
+.checkout-val.bold {
+  font-weight: 600;
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.selected-seats-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.checkout-divider {
+  border-top: 1px solid var(--border-color);
+  margin: 16px 0;
+}
+
+.total-row {
+  margin-bottom: 0;
+}
+
+.total-price {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--success);
+  filter: drop-shadow(0 0 6px var(--success-glow));
+}
+
+.checkout-rbac-warning {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mt-6 {
+  margin-top: 24px;
+}
+
+@media (max-width: 640px) {
+  .movie-details-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px;
+  }
+  .movie-details-info {
+    align-items: center;
+    text-align: center;
+  }
+}
