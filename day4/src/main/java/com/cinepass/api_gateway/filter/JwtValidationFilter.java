@@ -30,8 +30,8 @@ public class JwtValidationFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getURI().getPath();
 
-        // 1. Bypass authentication verification for public endpoints (such as Auth Service register/login)
-        if (path.startsWith("/auth/")) {
+        // 1. Bypass authentication verification for public endpoints (such as Auth Service register/login, static uploads)
+        if (path.startsWith("/auth/") || path.startsWith("/uploads/")) {
             return chain.filter(exchange);
         }
 
