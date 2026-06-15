@@ -44,19 +44,8 @@ apiClient.interceptors.response.use(
 
 export const authService = {
   login: async (email, password) => {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 600));
-    
-    // Conceptually we do:
-    // const response = await apiClient.post('/auth/login', { email, password });
-    // return response.data;
-    
-    mockDb.initMockStorage();
-    const users = mockDb.getUsers();
-    const user = users.find(u => u.email === email && u.password === password);
-    if (!user) {
-      throw new Error('Invalid email or password');
-    }
+    const response = await apiClient.post('/auth/login', { email, password });
+    const user = response.data;
     
     // Set token in localStorage (matches JWT Validation flow)
     localStorage.setItem('cinema_jwt_token', user.token);
@@ -70,13 +59,8 @@ export const authService = {
   },
   
   register: async (name, email, password) => {
-    await new Promise(resolve => setTimeout(resolve, 600));
-    
-    // Conceptually:
-    // const response = await apiClient.post('/auth/register', { name, email, password });
-    // return response.data;
-    
-    const newUser = mockDb.registerUser({ name, email, password });
+    const response = await apiClient.post('/auth/register', { name, email, password });
+    const newUser = response.data;
     return {
       token: newUser.token,
       email: newUser.email,
@@ -92,43 +76,63 @@ export const authService = {
 
 export const movieService = {
   getAll: async () => {
-    await new Promise(resolve => setTimeout(resolve, 400));
-    
-    // Conceptually:
-    // const response = await apiClient.get('/movies');
-    // return response.data;
-    
-    return mockDb.getMovies();
+    const response = await apiClient.get('/movies');
+    // Standard response format contains "data", which is a Spring Page object.
+    const movies = response.data.data.content || response.data.data;
+    return movies.map(m => ({
+      ...m,
+      genre: Array.isArray(m.genre) ? m.genre.join(' / ') : (m.genre || 'Drama'),
+      duration: typeof m.duration === 'number' ? `${m.duration} min` : m.duration,
+      poster: m.posterUrl || m.poster
+    }));
   },
   
   getById: async (id) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
-    // Conceptually:
-    // const response = await apiClient.get(`/movies/${id}`);
-    // return response.data;
-    
-    return mockDb.getMovieById(id);
+    const response = await apiClient.get(`/movies/${id}`);
+    const m = response.data.data;
+    return {
+      ...m,
+      genre: Array.isArray(m.genre) ? m.genre.join(' / ') : (m.genre || 'Drama'),
+      duration: typeof m.duration === 'number' ? `${m.duration} min` : m.duration,
+      poster: m.posterUrl || m.poster
+    };
   },
   
   create: async (movieData) => {
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // Parse duration (e.g. "166 min" or "166") to integer minutes for backend
+    let durationMins = 120;
+    if (movieData.duration) {
+      const parsed = parseInt(movieData.duration.toString().replace(/[^0-9]/g, ''));
+      if (!isNaN(parsed)) durationMins = parsed;
+    }
+    // Parse genre string (e.g. "Sci-Fi / Adventure") to array for backend
+    const genreArray = movieData.genre ? movieData.genre.split('/').map(g => g.trim()) : [];
     
-    // Conceptually:
-    // const response = await apiClient.post('/movies', movieData);
-    // return response.data;
+    const backendData = {
+      title: movieData.title,
+      genre: genreArray,
+      language: movieData.language || 'English',
+      duration: durationMins,
+      releaseDate: movieData.releaseDate || new Date().toISOString().split('T')[0],
+      posterUrl: movieData.poster || '',
+      description: movieData.description || '',
+      price: Number(movieData.price) || 12.0,
+      showtimes: movieData.showtimes || ['12:00 PM', '4:00 PM', '8:00 PM']
+    };
     
-    return mockDb.addMovie(movieData);
+    const response = await apiClient.post('/movies', backendData);
+    const m = response.data.data;
+    return {
+      ...m,
+      genre: Array.isArray(m.genre) ? m.genre.join(' / ') : (m.genre || 'Drama'),
+      duration: typeof m.duration === 'number' ? `${m.duration} min` : m.duration,
+      poster: m.posterUrl || m.poster
+    };
   },
   
   delete: async (id) => {
-    await new Promise(resolve => setTimeout(resolve, 400));
-    
-    // Conceptually:
-    // const response = await apiClient.delete(`/movies/${id}`);
-    // return response.data;
-    
-    return mockDb.deleteMovie(id);
+    const response = await apiClient.delete(`/movies/${id}`);
+    return response.data.status === 'success';
   }
 };
 

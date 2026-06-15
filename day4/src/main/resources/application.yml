@@ -18,7 +18,7 @@ spring:
         - id: movie-service-route
           uri: http://localhost:8082
           predicates:
-            - Path=/api/movies/**
+            - Path=/api/movies/**, /api/reviews/**
           filters:
             - AddRequestHeader=X-Gateway-Token, GatewayPass
 
