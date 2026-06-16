@@ -138,43 +138,23 @@ export const movieService = {
 
 export const bookingService = {
   getAll: async () => {
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    // Conceptually:
-    // const response = await apiClient.get('/bookings');
-    // return response.data;
-    
-    return mockDb.getBookings();
+    const response = await apiClient.get('/bookings');
+    return response.data.data;
   },
   
   getByUserEmail: async (email) => {
-    await new Promise(resolve => setTimeout(resolve, 400));
-    
-    // Conceptually:
-    // const response = await apiClient.get(`/bookings/user/${email}`);
-    // return response.data;
-    
-    return mockDb.getBookingsByEmail(email);
+    const response = await apiClient.get(`/bookings/user/${email}`);
+    return response.data.data;
   },
   
   create: async (bookingData) => {
-    await new Promise(resolve => setTimeout(resolve, 600));
-    
-    // Conceptually:
-    // const response = await apiClient.post('/bookings', bookingData);
-    // return response.data;
-    
-    return mockDb.addBooking(bookingData);
+    const response = await apiClient.post('/bookings', bookingData);
+    return response.data.data;
   },
   
   getOccupied: async (movieId, showtime) => {
-    await new Promise(resolve => setTimeout(resolve, 200));
-    
-    // Conceptually:
-    // const response = await apiClient.get(`/bookings/occupied?movieId=${movieId}&showtime=${showtime}`);
-    // return response.data;
-    
-    return mockDb.getOccupiedSeats(movieId, showtime);
+    const response = await apiClient.get(`/bookings/occupied?movieId=${movieId}&showtime=${showtime}`);
+    return response.data.data;
   }
 };
 
