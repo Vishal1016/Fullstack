@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://your-deployed-api-gateway.up.railway.app/api/:path*"
+    },
+    {
+      "source": "/auth/:path*",
+      "destination": "https://your-deployed-api-gateway.up.railway.app/auth/:path*"
+    },
+    {
+      "source": "/uploads/:path*",
+      "destination": "https://your-deployed-api-gateway.up.railway.app/uploads/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
