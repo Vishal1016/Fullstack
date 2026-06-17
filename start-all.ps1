@@ -11,9 +11,9 @@ Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd $PSScriptRoot\
 Write-Host "[2/5] Starting Movie Catalog Service on port 8082..." -ForegroundColor Cyan
 Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd $PSScriptRoot\day5; .\mvnw spring-boot:run"
 
-# 3. Start Booking Service (Day 6)
+# 3. Start Booking Service (Day 7)
 Write-Host "[3/5] Starting Booking Service on port 8083..." -ForegroundColor Cyan
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd $PSScriptRoot\day6; .\mvnw spring-boot:run"
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd $PSScriptRoot\day7; .\mvnw spring-boot:run"
 
 # 4. Start API Gateway (Day 4)
 Write-Host "[4/5] Starting API Gateway on port 8080..." -ForegroundColor Cyan
